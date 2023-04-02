@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="doc\**" />
+    <Compile Remove="ViewModel\List\**" />
+    <EmbeddedResource Remove="doc\**" />
+    <EmbeddedResource Remove="ViewModel\List\**" />
+    <None Remove="doc\**" />
+    <None Remove="ViewModel\List\**" />
+    <Page Remove="doc\**" />
+    <Page Remove="ViewModel\List\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="ViewModel\SideMenu\.Design\SideMenuDesignModel.cs" />
+    <Compile Include="ViewModel\SideMenu\.Design\SubMenuDesignModel.cs" />
+    <Compile Include="ViewModel\Tabs\.Design\TabControlContainerDesignModel.cs" />
+    <Compile Include="ViewModel\Tabs\.Design\TabControlDesignModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include=".resources\fonts\Jost-Regular.ttf" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Resource Include=".resources\icons\chronicle_icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include=".resources\fonts\Font Awesome 6 Free-Regular-400.otf" />
+    <Resource Include=".resources\fonts\Font Awesome 6 Free-Solid-900.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dna.Framework" Version="1.0.7.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\TrashPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SharePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\CalendarPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

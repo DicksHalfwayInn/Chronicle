@@ -1,0 +1,381 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Chronicle">
+
+    <!-- Regular button -->
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource GrayBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+        <Setter Property="FontSize" Value="{StaticResource Small}" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" Padding="2">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightDarkBrush}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Add icon style -->
+    <Style x:Key="AddIconStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource GrayBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+        <Setter Property="FontSize" Value="{StaticResource Small}" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    
+                    <Border x:Name="border"
+							Background="{TemplateBinding Background}" >
+                        
+                        <!-- Render scale transform on hover -->
+                        <Border.RenderTransform>
+                            <ScaleTransform />  
+                        </Border.RenderTransform>
+                        <Border.RenderTransformOrigin>
+                            <Point X="0.5" Y="0.5" />
+                        </Border.RenderTransformOrigin>
+
+                        <TextBlock Text="{TemplateBinding Content}" 
+								   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+								   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1.2" Storyboard.TargetName="border" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.15" />
+                                    <DoubleAnimation To="1.2" Storyboard.TargetName="border" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1" Storyboard.TargetName="border" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.15" />
+                                    <DoubleAnimation To="1" Storyboard.TargetName="border" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#region Menu button -->
+    
+    <!-- Note button -->
+    <Style x:Key="NotesMenuButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource GrayBrush}" />
+        <Setter Property="FontSize" Value="{StaticResource Small}" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Width" Value="270" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Menu title -->
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" Padding="8, 2">
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                    Text="{StaticResource NoteButtonIcon}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" Margin="50, 0, -50, 0" />
+
+                            <TextBlock Grid.Column="1"
+                                    Text="Notes" FontFamily="{StaticResource JostFont}"
+                                    VerticalAlignment="Center" Margin="50, 0, 0, 0" />
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightDarkBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Book button -->
+    <Style x:Key="BooksMenuButton" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource NotesMenuButton}" >
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Menu title -->
+                    <Border Grid.Row="0" Background="{TemplateBinding Background}" BorderThickness="0" Padding="8, 2">
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                    Text="{StaticResource BookButtonIcon}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" Margin="50, 0, -50, 0" />
+
+                            <TextBlock Grid.Column="1"
+                                    Text="Books" FontFamily="{StaticResource JostFont}"
+                                    VerticalAlignment="Center" Margin="50, 0, 0, 0" />
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightDarkBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Calendar button -->
+    <Style x:Key="CalendarMenuButton" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource NotesMenuButton}" >
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Menu title -->
+                    <Border Grid.Row="0" Background="{TemplateBinding Background}" BorderThickness="0" Padding="8, 2">
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                    Text="{StaticResource CalendarButtonIcon}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" Margin="50, 0, -50, 0" />
+
+                            <TextBlock Grid.Column="1"
+                                    Text="Calendar" FontFamily="{StaticResource JostFont}"
+                                    VerticalAlignment="Center" Margin="50, 0, 0, 0" />
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightDarkBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+                        </Trigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Share button -->
+    <Style x:Key="ShareMenuButton" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource NotesMenuButton}" >
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Menu title -->
+                    <Border Grid.Row="0" Background="{TemplateBinding Background}" BorderThickness="0" Padding="8, 2">
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                    Text="{StaticResource ShareButtonIcon}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" Margin="50, 0, -50, 0" />
+
+                            <TextBlock Grid.Column="1"
+                                    Text="Share" FontFamily="{StaticResource JostFont}"
+                                    VerticalAlignment="Center" Margin="50, 0, 0, 0" />
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightDarkBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True"> 
+                            <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Settings button -->
+    <Style x:Key="SettingsMenuButton" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource NotesMenuButton}" >
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Menu title -->
+                    <Border Grid.Row="0" Background="{TemplateBinding Background}" BorderThickness="0" Padding="8, 2">
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                    Text="{StaticResource SettingButtonIcon}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" Margin="50, 0, -50, 0" />
+
+                            <TextBlock Grid.Column="1"
+                                    Text="Settings" FontFamily="{StaticResource JostFont}"
+                                    VerticalAlignment="Center" Margin="50, 0, 0, 0" />
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightDarkBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Trash button -->
+    <Style x:Key="TrashMenuButton" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource NotesMenuButton}" >
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Menu title -->
+                    <Border Grid.Row="0" Background="{TemplateBinding Background}" BorderThickness="0" Padding="8, 2">
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                    Text="{StaticResource TrashButtonIcon}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" Margin="50, 0, -50, 0" />
+
+                            <TextBlock Grid.Column="1"
+                                    Text="Trash" FontFamily="{StaticResource JostFont}"
+                                    VerticalAlignment="Center" Margin="50, 0, 0, 0" />
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource LightDarkBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource BlueBrush}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion Menu button -->
+
+    <!-- List button style -->
+    <Style x:Key="ListItemButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+        <Setter Property="FontFamily" Value="{StaticResource JostFont}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" Padding="8, 2">
+
+                        <Grid Margin="0, 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                    Text="{StaticResource FeatherIcon}" FontFamily="{StaticResource FontAwesomeSolid}"
+                                    VerticalAlignment="Center" Margin="10, 0, 10, 0" Padding="4" />
+
+                            <ContentPresenter Grid.Column="1" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" Margin="0, 0, 40, 0" />
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+
+</ResourceDictionary>
