@@ -65,7 +65,8 @@
                     <!-- Top group -->
                     <StackPanel Grid.Row="0" >
 
-                        <ListView ItemsSource="{Binding SideMenuControls}"
+                        <ListView Background="Black" ItemsSource="{Binding SideMenuControls}"
+                                  SelectedItem="{Binding SelectedSideMenu}"
                                       />
 
                         <local:SideMenuControl MenuTitle="Note" MenuIcon="Note" 

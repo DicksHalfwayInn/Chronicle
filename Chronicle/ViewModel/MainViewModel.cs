@@ -14,6 +14,7 @@ namespace Chronicle
     /// </summary>
     public class MainViewModel : BaseViewModel
     {
+        private SideMenuControl selectedSideMenu;
         #region Public Properties
 
         /// <summary>
@@ -39,7 +40,21 @@ namespace Chronicle
 
         #region Side menu
 
-        public SideMenuControl SelectedSideMenu { get; set; }
+        public SideMenuControl SelectedSideMenu 
+        { 
+            get => selectedSideMenu;
+            set
+            {
+               selectedSideMenu = value;
+               if (ActiveSideMenu != null)
+                {
+                    //ActiveSideMenu
+                }
+            }
+        }
+
+        public SideMenuControl ActiveSideMenu { get; set; }
+           
 
         public List<SideMenuControl> SideMenuControls { get; set; } = new List<SideMenuControl>();
 

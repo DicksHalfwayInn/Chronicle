@@ -18,6 +18,8 @@ namespace Chronicle
 
         public bool HasSubMenu { get; set; }
 
+        
+
 
 
         /// <summary>
